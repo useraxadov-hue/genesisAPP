@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizimga kirish...</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading">Sizning ma'lumotlaringiz tekshirilmoqda...</div>
+
+    <script>
+        // Telegram Web App ni ishga tushirish
+        Telegram.WebApp.ready();
+
+        window.onload = function() {
+            // 1. Telegramdan foydalanuvchi ID sini olish
+            let userId = Telegram.WebApp.initDataUnsafe?.user?.id;
+
+            // Agar biron sabab bilan ID olinmasa, xatolik bermasligi uchun default raqam
+            if (!userId) {
+                userId = "123456"; 
+            }
+
+            // 2. GitHub sahifangizga yo'naltiruvchi manzilni yasash
+            // E'tibor bering: To'g'ri ishlashi uchun /?userid= formatidan foydalandik
+            const targetUrl = "https://useraxadov-hue.github.io/genesisopenapp/?userid=" + userId;
+
+            // 3. HAVOLANI TASHQI BRAUZERDA OCHISH (Juda muhim!)
+            // openLink() buyrug'i havolani Telegram ichida emas, telefonning o'z brauzerida ochishga majbur qiladi
+            Telegram.WebApp.openLink(targetUrl);
+        };
+    </script>
+</body>
+</html>
